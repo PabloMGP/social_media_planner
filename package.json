@@ -1,0 +1,22 @@
+{
+  "name": "social_media_planner",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.41.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "webpack": "^5.84.0",
+    "webpack-cli": "^5.1.1"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0"
+  }
+}

@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container {
+    margin: 15px;
+}
+
+.new-campaign-form.hidden {
+    display: none;
+}
+
+.new-campaign-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
