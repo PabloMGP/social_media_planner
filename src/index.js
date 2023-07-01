@@ -1,3 +1,5 @@
-import { addCampaign, allCampaigns, populateDisplay } from './campaign';
+import { addCampaign } from './campaign';
+import { addPost } from './post';
 
 addCampaign();
+addPost();

@@ -12,7 +12,8 @@ body {
     margin: 15px;
 }
 
-.new-campaign-form.hidden {
+.new-campaign-form.hidden,
+.new-post-form.hidden {
     display: none;
 }
 

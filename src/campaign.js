@@ -39,6 +39,7 @@ function populateDisplay(title, description, dueDate, author, priority, stat) {
     const displayAuthor = document.createElement('p');
     const displayPriority = document.createElement('p');
     const displayStatus = document.createElement('p');
+    const _viewPostsBtn = document.createElement('button');
 
     displayTitle.textContent = title;
     displayDescription.textContent = `description: ${description}`;
@@ -46,15 +47,24 @@ function populateDisplay(title, description, dueDate, author, priority, stat) {
     displayAuthor.textContent = `Author: ${author}`;
     displayPriority.textContent = `Priority: ${priority}`;
     displayStatus.textContent = `Status: ${stat}`;
+    _viewPostsBtn.textContent = 'View Campaign Posts';
+    _viewPostsBtn.classList.add('view-posts-btn')
 
     campaignsList.appendChild(displayCampaign);
     displayCampaign.appendChild(displayTitle);
     displayCampaign.appendChild(displayDescription);
-
     displayCampaign.appendChild(displayDueDate);
-
     displayCampaign.appendChild(displayAuthor);
     displayCampaign.appendChild(displayPriority);
     displayCampaign.appendChild(displayStatus);
-}
-}
+    displayCampaign.appendChild(_viewPostsBtn);
+
+        // _viewPostsBtn.addEventListener('click', () => {
+        //     showAllPosts();
+        }
+    };
+    
+
+
+// function showAllPosts() {
+//     console.log(allCampaigns[0])

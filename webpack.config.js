@@ -7,6 +7,8 @@ module.exports = {
         main: './src/index.js',
         createCampaigns: './src/createCampaign.js',
         campaign: './src/campaign.js',
+        post: './src/post.js',
+        createPost: './src/createPost.js',
         utilities: './src/utilities.js',
     },
     output: {
