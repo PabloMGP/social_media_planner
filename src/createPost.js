@@ -1,12 +1,13 @@
-export function createPost(title, campaign, description, postCount, dueDate, author, priority, stat) {
+export function createPost(title, selectedCampaign, description, dueDate, author, priority, stat, id) {
     return {
         title: title,
-        campaign: campaign,
+        selectedCampaign: selectedCampaign,
         description: description,
-        postCount: postCount,
         dueDate: dueDate,
         author: author,
         priority: priority,
         status: stat,
+        id: id,
     };
 } 
+

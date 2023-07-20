@@ -1,72 +1,76 @@
+import { allCampaigns } from './campaign';
+import { createCampaign } from './createCampaign';
 import { createPost } from './createPost';
+import { addCampaign } from './campaign';
 import { formatDate } from './utilities';
+import { loadPostsFromLocalStorage, populatePostDisplay, findCampaignByTitle } from './postUtils';
+
 
 export const allPosts = [];
 
+
+
 export function addPost() {
-const newPostBtn = document.querySelector('.add-post');
-const newPostForm = document.querySelector('.new-post-form');
-const postList = document.querySelector('.post-list');
 
-newPostBtn.addEventListener('click', () => {
-    newPostForm.classList.toggle('hidden');
-    console.log('aaa')
-})
+    const newPostBtn = document.querySelector('.add-post');
+    const newPostForm = document.querySelector('.new-post-form');
+ 
+    const campaignDropdown = document.getElementById('campaign-dropdown');
+    const closePostsFormBtn = document.querySelector('.close-posts-form')
 
-newPostForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
+    const allPostsBtn = document.querySelector('.view-all-posts');
+    allPostsBtn.addEventListener('click', () => {
+        const postList = document.querySelectorAll('.post-list [data-id]');
+        postList.forEach((postElement) => {
+            postElement.classList.remove('hidden');
 
-    const title = document.getElementById('post-title').value;
-    const description = document.getElementById('post-description').value;
-    const unformattedDueDate = document.getElementById('post-date').value;
-    const author = document.getElementById('post-author').value;
-    const priority = document.getElementById('post-priority').value;
-    const stat = document.getElementById('post-status').value;
+        });
+    });
 
-    // Date formating with date-fns
-    const dueDate = await formatDate(new Date(unformattedDueDate), 'MMMM dd, yyyy', 'en-US');
+    newPostBtn.addEventListener('click', () => {
+        newPostForm.classList.toggle('hidden');
+        console.log('aaa')
+    })
 
-    const newPost = createPost(title, description, dueDate, author, priority, stat);
-    allPosts.push(newPost);
 
-    populateDisplay(title);
-  });
+    closePostsFormBtn.addEventListener('click', () => {
+        newPostForm.classList.toggle('hidden');
+    })
 
-function populateDisplay(title, description, dueDate, author, priority, stat) {
-    const displayPost = document.createElement('div');
-    const displayTitle = document.createElement('h2');
-    const displayDescription = document.createElement('p');
-    const displayDueDate = document.createElement('p');
-    const displayAuthor = document.createElement('p');
-    const displayPriority = document.createElement('p');
-    const displayStatus = document.createElement('p');
-    const _viewPostsBtn = document.createElement('button');
+    newPostForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-    displayTitle.textContent = title;
-    displayDescription.textContent = `description: ${description}`;
-    displayDueDate.textContent = `Due Date: ${dueDate}`;
-    displayAuthor.textContent = `Author: ${author}`;
-    displayPriority.textContent = `Priority: ${priority}`;
-    displayStatus.textContent = `Status: ${stat}`;
-    _viewPostsBtn.textContent = 'View Campaign Posts';
-    _viewPostsBtn.classList.add('view-posts-btn')
+        const title = document.getElementById('post-title').value;
+        const selectedCampaign = campaignDropdown.value;
+        const description = document.getElementById('post-description').value;
+        const unformattedDueDate = document.getElementById('post-date').value;
+        const author = document.getElementById('post-author').value;
+        const priority = document.getElementById('post-priority').value;
+        const stat = document.getElementById('post-status').value;
+        const id = generateUniqueId();
 
-    postList.appendChild(displayPost);
-    displayPost.appendChild(displayTitle);
-    displayPost.appendChild(displayDescription);
-    displayPost.appendChild(displayDueDate);
-    displayPost.appendChild(displayAuthor);
-    displayPost.appendChild(displayPriority);
-    displayPost.appendChild(displayStatus);
-    displayPost.appendChild(_viewPostsBtn);
+        // Date formating with date-fns
+        const dueDate = await formatDate(new Date(unformattedDueDate), 'MMMM dd, yyyy', 'en-US');
 
-        _viewPostsBtn.addEventListener('click', () => {
-            showAllPosts();
-        })
-    };
+        const newPost = createPost(title, selectedCampaign, description, dueDate, author, priority, stat, id);
+        allPosts.push(newPost);
+
+        const associatedCampaign = findCampaignByTitle(newPost.selectedCampaign);
+        if (associatedCampaign) {
+            associatedCampaign.posts.push(newPost);
+            console.log(associatedCampaign)
+        }
+
+        localStorage.setItem('posts', JSON.stringify(allPosts));
+
+        populatePostDisplay(title, selectedCampaign, description, dueDate, author, priority, stat, id);
+    });
+
+    function generateUniqueId() {
+        return Date.now().toString();
+    }
+
     
+    loadPostsFromLocalStorage();
 }
 
-function showAllPosts() {
-    console.log(allCampaigns[0])
-}

@@ -1,4 +1,4 @@
-export function createCampaign(title, description, dueDate, author, priority, stat, posts, postCount = 0) {
+export function createCampaign(title, description, dueDate, author, priority, stat, posts) {
     return {
         title: title,
         description: description,
@@ -7,12 +7,9 @@ export function createCampaign(title, description, dueDate, author, priority, st
         priority: priority,
         status: stat,
         posts: [],
-        get postCount() {
-            return postCount;
-        },
-        set postCount(value) {
-            postCount = value;
-        },
-    };
-} 
+        // get postCount() {
+        //     return postCount;
+        // },
+        };
+      }
 

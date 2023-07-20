@@ -10,6 +10,7 @@ module.exports = {
         post: './src/post.js',
         createPost: './src/createPost.js',
         utilities: './src/utilities.js',
+        postUtils: './src/postUtils.js',
     },
     output: {
         filename: '[name].bundle.js',
